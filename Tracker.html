@@ -1,0 +1,31 @@
+<script type="text/javascript">
+  /*Form Cant have Allow field to be populated dynamically needs to be turned OFF*/
+  /*UTM Fields must have default value set as form name*/
+
+  function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+  }
+
+  var urlParamsToForward = [
+    'gclid',
+    'fbclid',
+    'email',
+    'utm_medium',
+    'utm_campaign',
+    'utm_content',
+    'utm_source'
+  ];
+
+  jQuery(document).ready(function($) {
+    $.each(urlParamsToForward, function(i, param) {
+      var selector = 'input[value="' + param + '"]';
+      jQuery(selector).val(getUrlParameter(param));
+    });
+  });
+
+  /*Form Cant have Allow field to be populated dynamically needs to be turned OFF*/
+  /*UTM Fields must have default value set as form name*/
+</script>
